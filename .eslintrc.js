@@ -23,7 +23,15 @@ module.exports = {
   rules: {
     // allow async-await
     'generator-star-spacing': 'off',
-    semi: [2, 'never'],
+    // 关闭分号检查规则
+    semi: 'off',
+    "space-before-function-paren": ["error", "always"],
+    // 不希望检查函数与参数前面分号限制
+    "space-before-function-paren": ["error", {
+        "anonymous": "ignore",
+        "named": "ignore",
+        "asyncArrow": "ignore"
+    }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

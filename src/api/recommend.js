@@ -1,9 +1,9 @@
 // import jsonp from 'common/js/jsonp'
-import {commonParams} from './config'
-import axios from 'axios'
+import { commonParams } from './config';
+import axios from 'axios';
 
 //  获取轮播图相关数据API
-export function getRecommend () {
+export function getRecommend() {
   const url = '/api/getRecommend'
 
   const data = Object.assign({}, commonParams, {
@@ -12,16 +12,27 @@ export function getRecommend () {
     needNewCode: 1
   })
 
-  return axios.get(url, {
-    params: data
-  }).then((res) => {
-    return Promise.resolve(res.data)
+  // return axios.get(url, {
+  //   params: data
+  // }).then((res) => {
+  //   return Promise.resolve(res.data)
+  // })
+  return new Promise((resolve, reject) => {
+    axios.get(url, {
+      params: data
+    }).then((res) => {
+      // console.log(res.data);
+      resolve(res.data);
+    }).catch((err) => {
+      reject(err);
+    })
   })
 }
 
-export function getDiscList () {
+// 歌单数据
+export function getDiscList() {
   // 线上环境地址，同学们根据自己的需要配置修改
-  const url = '/api/getDiscList'
+  const url = '/api/getDiscList';
 
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
@@ -37,6 +48,6 @@ export function getDiscList () {
   return axios.get(url, {
     params: data
   }).then((res) => {
-    return Promise.resolve(res.data)
+    return Promise.resolve(res.data);
   })
 }

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import BSCroll from 'better-scroll'
-const DIRECTION_H = 'horizontal'
-const DIRECTION_V = 'vertical'
+import BSCroll from 'better-scroll';
+const DIRECTION_H = 'horizontal';
+const DIRECTION_V = 'vertical';
 
 export default {
   props: {

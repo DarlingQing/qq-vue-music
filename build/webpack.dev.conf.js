@@ -23,6 +23,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devtool: config.dev.devtool,
 
   // these devServer options should be customized in /config/index.js
+  // 代理服务器：app 就是 before 函数的参数，实际上是一个 express 的实例。相当于 const app = express()
   devServer: {
     before(app) {
       app.use(bodyParser.urlencoded({extended: true}))

@@ -20,6 +20,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="stylus">
+  // @import "~common/stylus/variable"
 </style>
