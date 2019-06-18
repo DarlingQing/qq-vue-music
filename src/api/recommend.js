@@ -2,7 +2,9 @@
 import { commonParams } from './config';
 import axios from 'axios';
 
-//  获取轮播图相关数据API
+/**
+ * 获取轮播图相关数据API
+ */
 export function getRecommend() {
   const url = '/api/getRecommend'
 
@@ -29,7 +31,9 @@ export function getRecommend() {
   })
 }
 
-// 歌单数据
+/**
+ * 歌单数据
+ */
 export function getDiscList() {
   // 线上环境地址，同学们根据自己的需要配置修改
   const url = '/api/getDiscList';

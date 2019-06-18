@@ -62,9 +62,7 @@ export default {
   },
   created () {
     // 获取轮播图数据
-    setTimeout(() => {
-      this._getRecommend();
-    }, 1000)
+    this._getRecommend();
     // 获取推荐歌单数据
     this._getDiscList();
   },

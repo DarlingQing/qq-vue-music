@@ -90,29 +90,29 @@ export default {
       //  是否派发滚动开始的事件
       if (this.beforeScroll) {
         this.scroll.on('beforeScrollStart', () => {
-          this.$emit('beforeScroll')
+          this.$emit('beforeScroll');
         })
       }
     },
     //  代理better-scroll的disable事件
     disable () {
-      this.scroll && this.scroll.disable()
+      this.scroll && this.scroll.disable();
     },
     //  代理better-scroll的enable事件
     enable () {
-      this.scroll && this.scroll.enable()
+      this.scroll && this.scroll.enable();
     },
     // 代理better-scroll的refresh事件
     refresh () {
-      this.scroll && this.scroll.refresh()
+      this.scroll && this.scroll.refresh();
     },
     // 代理better-scroll的scrollTo事件
     scrollTo () {
-      this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
+      this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
     },
     // 代理better-scroll的scrollToElement事件
     scrollToElement () {
-      this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
+      this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
     }
   },
   watch: {
