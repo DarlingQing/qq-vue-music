@@ -5,12 +5,13 @@ import App from './App';
 import router from './router';
 import fastclick from 'fastclick';
 import VueLazyload from 'vue-lazyload';
-
-import 'common/stylus/index.styl';
+import PluginRem from 'lib/vueRemPlugins.js';
 
 Vue.config.productionTip = false;
 
 fastclick.attach(document.body);
+
+Vue.use(PluginRem);
 
 Vue.use(VueLazyload, {
   loading: require('common/image/default.png')

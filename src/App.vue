@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import MHeader from 'components/m-header/m-header.vue'
-import Tab from 'components/tab/tab.vue'
+import MHeader from 'components/m-header/m-header.vue';
+import Tab from 'components/tab/tab.vue';
 export default {
   name: 'App',
   components: {
@@ -20,6 +20,6 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" src="common/stylus/index.styl">
   // @import "~common/stylus/variable"
 </style>
