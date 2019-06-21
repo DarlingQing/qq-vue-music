@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     selectItem (item) {
-      // this.$emit('select', item)
+      this.$emit('select', item);
     },
     // 实时获取scrolly的值
     scroll (pos) {
@@ -121,7 +121,7 @@ export default {
     _calculateHeight () {
       this.listHeight = [];
       const list = this.$refs.listGroup;
-      console.log(list);
+      // console.log(list);
       let height = 0;
       this.listHeight.push(height);
       for (let i = 0; i < list.length; i++) {
@@ -129,7 +129,7 @@ export default {
         height += item.clientHeight;
         this.listHeight.push(height);
       }
-      console.log(this.listHeight);
+      // console.log(this.listHeight);
     }
   },
   watch: {

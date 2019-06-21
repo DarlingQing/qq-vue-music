@@ -1,13 +1,15 @@
 <!--歌手页面-->
 <template>
   <div class="singer">
-    <list-view :data="singers"></list-view>
+    <list-view :data="singers" @select="selectSinger"></list-view>
+    <router-view></router-view>
   </div>
 </template>
 <script>
 import {getSingerList} from 'api/singer';
 import Singer from 'common/js/singer';
 import ListView from 'base/list-view/list-view';
+import {mapMutations} from 'vuex';
 // 定义常量
 const HOT_SINGER_LEN = 10;
 const HOT_NAME = '热门';
@@ -26,11 +28,19 @@ export default {
     this._getSingerList();
   },
   methods: {
+    // 进入歌手详情页
+    selectSinger(singer) {
+      this.$router.push({
+        path: `/singer/${singer.id}`
+      })
+      this.setSinger(singer);
+      console.log(this.$store.state.singer);
+    },
     _getSingerList() {
       getSingerList().then((res) => {
         console.log(res);
         this.singers = this._normalizeSinger(res.data.list);
-        console.log(this.singers);
+        // console.log(this.singers);
       })
     },
     // 处理歌手列表数据，进行热门以及字母排序
@@ -46,7 +56,7 @@ export default {
         if (index < HOT_SINGER_LEN) {
           map.hot.items.push(new Singer({
             name: item.Fsinger_name,
-            id: item.Fsinger_id
+            id: item.Fsinger_mid
           }))
         }
         // 二位数组的字母数组添加
@@ -59,7 +69,7 @@ export default {
         }
         map[key].items.push(new Singer({
           name: item.Fsinger_name,
-          id: item.Fsinger_id
+          id: item.Fsinger_mid
         }))
       })
       // 处理map,区分热门和字母苏剧
@@ -78,7 +88,10 @@ export default {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0);
       })
       return hot.concat(ret);
-    }
+    },
+    ...mapMutations({
+      setSinger: 'SET_SINGER'
+    })
   }
 }
 </script>

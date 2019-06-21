@@ -1,34 +1,19 @@
-// import jsonp from 'common/js/jsonp'
-import { commonParams } from './config';
+import jsonp from 'common/js/jsonp'
+import {commonParams, options} from './config';
 import axios from 'axios';
 
 /**
  * 获取轮播图相关数据API
  */
 export function getRecommend() {
-  const url = '/api/getRecommend'
-
+  const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg';
   const data = Object.assign({}, commonParams, {
     platform: 'h5',
     uin: 0,
     needNewCode: 1
   })
 
-  // return axios.get(url, {
-  //   params: data
-  // }).then((res) => {
-  //   return Promise.resolve(res.data)
-  // })
-  return new Promise((resolve, reject) => {
-    axios.get(url, {
-      params: data
-    }).then((res) => {
-      // console.log(res.data);
-      resolve(res.data);
-    }).catch((err) => {
-      reject(err);
-    })
-  })
+  return jsonp(url, data, options)
 }
 
 /**

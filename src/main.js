@@ -6,6 +6,7 @@ import router from './router';
 import fastclick from 'fastclick';
 import VueLazyload from 'vue-lazyload';
 import PluginRem from 'lib/vueRemPlugins.js';
+import store from './store';
 
 Vue.config.productionTip = false;
 
@@ -21,6 +22,7 @@ Vue.use(VueLazyload, {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

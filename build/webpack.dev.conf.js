@@ -28,22 +28,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     before(app) {
       app.use(bodyParser.urlencoded({extended: true}))
       const querystring = require('querystring')
-      
-      app.get('/api/getRecommend', function (req, res) {
-        const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
-        axios.get(url, {
-          headers: {
-            referer: 'https://c.y.qq.com/',
-            host: 'c.y.qq.com'
-          },
-          params: req.query
-        }).then((response) => {
-          res.json(response.data)
-        }).catch((e) => {
-          console.log(e)
-        })
-      })
-      
+
       app.get('/api/getDiscList', function (req, res) {
         const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
         axios.get(url, {
@@ -121,17 +106,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         })
       })
     },
-    clientLogLevel: 'warning',
     historyApiFallback: true,
     hot: true,
-    contentBase: false, // since we use CopyWebpackPlugin.
-    compress: true,
     host: process.env.HOST || config.dev.host,
-    port: process.env.HOST || config.dev.port,
+    port: process.env.PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
-    overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
-      : false,
+    overlay: config.dev.errorOverlay ? {
+      warnings: false,
+      errors: true,
+    } : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin

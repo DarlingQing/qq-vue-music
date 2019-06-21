@@ -28,7 +28,7 @@ export default {
       const rem =
         docEl.clientWidth <= pxToRem * 10 ? docEl.clientWidth / 10 : pxToRem;
       docEl.style.fontSize = rem + 'px';
-      console.log(rem);
+      // console.log(rem);
     };
     const pageShow = (event) => {
       if (event.persisted) {
