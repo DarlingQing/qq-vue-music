@@ -6,7 +6,7 @@
                 @after-enter="afterEnter"
                 @leave="leave"
                 @after-leave="afterLeave"
-    >
+      >
       <div class="normal-player" v-show="fullScreen">
         <div class="background">
           <img width="100%" height="100%" :src="currentSong.image">
@@ -72,6 +72,7 @@
         </div>
       </div>
     </transition>
+    <audio :src="currentSong.url" ref="audio"></audio>
   </div>
 </template>
 <script>
@@ -97,16 +98,17 @@ export default {
   },
   mounted() {
     console.log(this.currentSong);
-    console.log(window.getComputedStyle(this.$refs.miniIcon).width);
-    console.log(window.getComputedStyle(this.$refs.miniIcon).paddingLeft);
-    console.log(window.getComputedStyle(this.$refs.middle).top);
-    console.log(((parseInt(window.getComputedStyle(this.$refs.miniPlayer).height) - parseInt(window.getComputedStyle(this.$refs.miniIcon).height))) / 2);
+    // console.log(window.getComputedStyle(this.$refs.miniIcon).width);
+    // console.log(window.getComputedStyle(this.$refs.miniIcon).paddingLeft);
+    // console.log(window.getComputedStyle(this.$refs.middle).top);
+    // console.log(((parseInt(window.getComputedStyle(this.$refs.miniPlayer).height) - parseInt(window.getComputedStyle(this.$refs.miniIcon).height))) / 2);
   },
   methods: {
     // 返回操作
     back() {
       this.setFullScreen(false);
     },
+    // 设置全屏播放
     open() {
       this.setFullScreen(true);
     },
@@ -146,7 +148,7 @@ export default {
       const timer = setTimeout(done, 400);
       this.$refs.cdWrapper.addEventListener('transitioned', () => {
         clearTimeout(timer);
-      })
+      });
     },
     // 动画完成后清空动画
     afterLeave() {
@@ -173,6 +175,13 @@ export default {
     ...mapMutations({
       setFullScreen: 'SET_FULLSCEREEN'
     })
+  },
+  watch: {
+    currentSong(newVal) {
+      this.$nextTick(() => {
+        this.$refs.audio.play();
+      })
+    }
   }
 }
 </script>
