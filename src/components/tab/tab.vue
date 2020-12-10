@@ -16,11 +16,7 @@
 </template>
 <script>
 export default {
-  data () {
-    return {}
-  },
-  methods: {
-  }
+  name: 'tab'
 }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

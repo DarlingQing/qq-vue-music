@@ -1,14 +1,24 @@
 <template>
   <div class="recommend">
     <!-- 必须传数据，重新计算scroll组件的高度 -->
-    <Scroll class="recommend-content" ref="scroll" :data="discList">
+    <scroll
+      :data="discList"
+      ref="scroll"
+      class="recommend-content"
+    >
     <!-- 子元素，需要轮播图和歌单数据都要 -->
       <div>
-        <div v-if="recommends.length" class="slider-wrapper">
+        <div
+          v-if="recommends.length"
+          class="slider-wrapper"
+        >
           <div class="slider-content">
             <!-- slider轮播组件 -->
             <slider ref="slider">
-              <div v-for="(item, index) in recommends" :key="index">
+              <div
+                v-for="(item, index) in recommends"
+                :key="index"
+              >
                 <a :href="item.linkUrl">
                   <img :src="item.picUrl" @load="loadImage">
                 </a>
@@ -20,13 +30,20 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li v-for="(item, index) in discList" :key=index class="item">
+            <li
+              v-for="(item, index) in discList"
+              :key="index"
+              class="item">
               <div class="icon">
-                <img width="60" height="60" v-lazy="item.imgurl">
+                <img
+                  v-lazy="item.imgurl"
+                  width="60"
+                  height="60"
+                />
               </div>
               <div class="text">
-                <h2 class="name" v-html="item.creator.name"></h2>
-                <p class="desc" v-html="item.dissname"></p>
+                <h2 v-html="item.creator.name" class="name" />
+                <p v-html="item.dissname" class="desc" />
               </div>
             </li>
           </ul>
@@ -34,9 +51,9 @@
       </div>
       <!-- loading组件非全局状态，应该放在每个对应的组件中，根据数据驱动它的显示和影藏 -->
       <div class="loading-container" v-show="!discList.length">
-        <loading></loading>
+        <loading />
       </div>
-    </Scroll>
+    </scroll>
   </div>
 </template>
 
@@ -44,14 +61,15 @@
 import Slider from 'base/slider/slider';
 import Scroll from 'base/scroll/scroll';
 import Loading from 'base/loading/loading';
-import {getRecommend, getDiscList} from 'api/recommend';
-import {ERR_OK} from 'api/config';
+import { getRecommend, getDiscList } from 'api/recommend';
+import { ERR_OK } from 'api/config';
 export default {
   components: {
     Slider,
     Scroll,
     Loading
   },
+
   data () {
     return {
       // 推荐轮播图数据
@@ -60,12 +78,14 @@ export default {
       discList: []
     }
   },
+
   created () {
     // 获取轮播图数据
     this._getRecommend();
     // 获取推荐歌单数据
     this._getDiscList();
   },
+
   methods: {
     // 确保图片被加载出来占位，bs能正确计算出高度，保证能滚动到底部
     loadImage () {
@@ -77,18 +97,18 @@ export default {
         }, 20)
       }
     },
+
     _getRecommend () {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {
-          console.log(res);
           this.recommends = res.data.slider;
         }
       })
     },
+
     _getDiscList () {
       getDiscList().then((res) => {
         if (res.code === ERR_OK) {
-          console.log(res);
           this.discList = res.data.list;
         }
       })

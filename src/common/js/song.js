@@ -55,7 +55,6 @@ export function processSongsUrl(songs) {
     return Promise.resolve(songs)
   }
   return getSongsUrl(songs).then((res) => {
-    console.log(songs);
     if (res.code === ERR_OK) {
       let midUrlInfo = res.url_mid.data.midurlinfo
       midUrlInfo.forEach((info, index) => {

@@ -1,38 +1,49 @@
 <template>
-  <transition name="slide" :appear="true">
-    <music-list :bg-image="bgImage" :title="title" :songs="songs"></music-list>
+  <transition :appear="true" name="slide">
+    <music-list
+      :bg-image="bgImage"
+      :title="title"
+      :songs="songs"
+    />
   </transition>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import MusicList from 'components/music-list/music-list'
-import {getSingerDetail} from 'api/singer';
-import {ERR_OK} from 'api/config';
-import {createSong, isValidMusic, processSongsUrl} from 'common/js/song';
-import {mapGetters} from 'vuex';
+import { getSingerDetail } from 'api/singer';
+import { ERR_OK } from 'api/config';
+import { createSong, isValidMusic, processSongsUrl } from 'common/js/song';
+
 export default {
+  components: {
+    MusicList
+  },
+
   computed: {
+    ...mapGetters(['singer']),
+
     // 标题
     title() {
-      return this.singer.name
+      return this.singer.name;
     },
     // 背景图片
     bgImage() {
-      return this.singer.avatar
-    },
-    ...mapGetters(['singer'])
+      return this.singer.avatar;
+    }
   },
+
   data() {
     return {
       songs: []
     }
   },
+
   created() {
     // 获取歌手详情
     this._getDetail();
   },
-  mounted() {
-  },
+
   methods: {
     _getDetail() {
       if (!this.singer.id) {
@@ -48,6 +59,7 @@ export default {
         }
       })
     },
+
     // 过滤数据，得到想到的歌手列表信息
     _normalizeSongs(list) {
       let ret = [];
@@ -59,9 +71,6 @@ export default {
       })
       return ret;
     }
-  },
-  components: {
-    MusicList
   }
 }
 </script>
