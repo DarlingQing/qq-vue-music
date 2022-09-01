@@ -4,14 +4,12 @@ import Router from 'vue-router';
 import ComponentDemo from '@/components/ComponentDemo/index.vue';
 import VueCode from '@/components/VueCode/index.vue';
 import VueCodeRender from '@/components/VueCode/render.vue';
-import ElemSearch from '@/components/ElemSearch/index.vue';
+// import ElemSearch from '@/components/ElemSearch/index.vue';
 
 //  注册组件
 Vue.use(Router);
 
-const Recommend = () => import('@/components/recommend/recommend');
 const Search = () => import('@/components/search/search');
-const UserCenter = () => import('@/components/user-center/user-center');
 
 export default new Router({
   routes: [
@@ -36,20 +34,8 @@ export default new Router({
       component: VueCodeRender,
     },
     {
-      path: '/js-code',
-      component: Recommend,
-    },
-    {
-      path: '/elem-search',
-      component: ElemSearch,
-    },
-    {
       path: '/search',
       component: Search,
-    },
-    {
-      path: '/user',
-      component: UserCenter,
     },
   ],
 })
