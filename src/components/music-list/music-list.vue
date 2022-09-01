@@ -2,36 +2,37 @@
   <div class="music-list">
     <!--头部-->
     <div @click="back" class="back">
-      <i class="icon-back" />
+      <<<<<<< HEAD <i class="icon-back" />
     </div>
     <h2 v-html="title" class="title" />
     <div :style="bgStyle" class="bg-image" ref="bgImage">
       <div class="play-wrapper">
         <div v-show="songs.length > 0 && playFlag" ref="playBtn" class="play">
-          <i class="icon-play" />
-          <span class="text">随机播放全部</span>
+          =======
+          <i class="icon-back"></i>
         </div>
+        <h2 v-html="title" class="title" />
+        <div :style="bgStyle" class="bg-image" ref="bgImage">
+          <div class="play-wrapper">
+            <div v-show="songs.length > 0 && playFlag" ref="playBtn" class="play">
+              <i class="icon-play" />
+              <span class="text">随机播放全部</span>
+            </div>
+          </div>
+          <div class="filter" ref="filter" />
+        </div>
+        <!--歌曲列表部分-->
+        <div class="bg-layer" ref="layer" />
+        <scroll :data="songs" :probe-type="probeType" :listen-scroll="listenScroll" @scroll="scroll" class="list"
+          ref="list">
+          <div class="song-list-wrapper">
+          </div>
+          <div v-show="!songs.length" class="loading-container">
+            <song-list :songs="songs" @select="selectItem" />
+          </div>
+          <loading />
+        </scroll>
       </div>
-      <div class="filter" ref="filter" />
-    </div>
-    <!--歌曲列表部分-->
-    <div class="bg-layer" ref="layer" />
-    <scroll
-      :data="songs"
-      :probe-type="probeType"
-      :listen-scroll="listenScroll"
-      @scroll="scroll"
-      class="list"
-      ref="list"
-    >
-      <div class="song-list-wrapper">
-        <song-list :songs="songs" @select="selectItem" />
-      </div>
-      <div v-show="!songs.length" class="loading-container">
-        <loading />
-      </div>
-    </scroll>
-  </div>
 </template>
 <script>
 import Scroll from 'base/scroll/scroll';
@@ -46,19 +47,27 @@ const transform = prefixStyle('transform');
 const backdrop = prefixStyle('backdrop-filter');
 
 export default {
+  components: {
+    Scroll,
+    SongList,
+    Loading
+  },
+
   props: {
     // 背景图片
     bgImage: {
       type: String,
       default: ''
     },
+
     // 歌曲列表
     songs: {
       type: Array,
       default: () => {
-        return []
+        return [];
       }
     },
+
     // 标题
     title: {
       type: String,
@@ -66,7 +75,7 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       // 滚动的距离
       scrollY: 0,
@@ -76,12 +85,11 @@ export default {
 
   computed: {
     bgStyle() {
-      return `background-image:url(${this.bgImage})`
+      return `background-image:url(${this.bgImage})`;
     }
   },
 
   created() {
-    // console.log(this.bgStyle);
     this.probeType = 3;
     this.listenScroll = true;
   },
@@ -92,10 +100,13 @@ export default {
     this.imageHeight = this.$refs.bgImage.clientHeight;
     this.$refs.list.$el.style.top = `${this.imageHeight}px`;
     this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
-    // console.log(this.minTranslateY);
   },
 
   methods: {
+    ...mapActions([
+      'selectPlay'
+    ]),
+
     // 返回上一级路由
     back() {
       this.$router.back();
@@ -115,12 +126,12 @@ export default {
     ...mapActions([
       'selectPlay'
     ])
+
   },
 
   watch: {
     // 监听scrollY的值
     scrollY(newVal) {
-      // console.log(newVal);
       let translateY = Math.max(this.minTranslateY, newVal);
       let zIndex = 0;
       let scale = 1;
@@ -150,12 +161,6 @@ export default {
       this.$refs.bgImage.style[transform] = `scale(${scale})`;
     }
   },
-
-  components: {
-    Scroll,
-    SongList,
-    Loading
-  }
 }
 </script>
 <style lang="stylus" src="./assets/index.styl" scoped></style>

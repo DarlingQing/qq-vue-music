@@ -1,6 +1,6 @@
 /**
  * Vue 插件：开启关闭rem支持
- * @author huangqin@gmail.com
+ * @author huangqin
  */
 
 const dpr = window.devicePixelRatio || 1;

@@ -6,6 +6,7 @@
 
 <script>
 import BSCroll from 'better-scroll';
+
 const DIRECTION_H = 'horizontal';
 const DIRECTION_V = 'vertical';
 
@@ -62,7 +63,7 @@ export default {
     },
   },
 
-  mounted () {
+  mounted() {
     //  异步加载，确保DOM已经渲染后在初始化better-scroll
     setTimeout(() => {
       this._initScroll();
@@ -71,25 +72,24 @@ export default {
 
   methods: {
     // 初始化Scroll组件
-    _initScroll () {
+    _initScroll() {
       // 如果没有初始化，则退出
       if (!this.$refs.wrapper) {
         return;
       }
-
       // 初始化scroll组件
       this.scroll = new BSCroll(this.$refs.wrapper, {
         probeType: this.probeType,
         click: this.click,
         eventPassthrough: this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
-      })
+      });
       //  是否派发滚动事件,滚动的时候派发事件
       if (this.listenScroll) {
-        let me = this
+        let me = this;
         // 外层是better-scroll事件，内层是当前vue实例派发一个scroll事件
         this.scroll.on('scroll', (pos) => {
           me.$emit('scroll', pos);
-        })
+        });
       }
       //  是否派发滚动到底部事件，用于上拉加载
       if (this.pullup) {
@@ -97,45 +97,45 @@ export default {
           if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
             this.$emit('scrollEnd');
           }
-        })
+        });
       }
       //  是否派发滚动开始的事件
       if (this.beforeScroll) {
         this.scroll.on('beforeScrollStart', () => {
           this.$emit('beforeScroll');
-        })
+        });
       }
     },
 
     //  代理better-scroll的disable事件
-    disable () {
+    disable() {
       this.scroll && this.scroll.disable();
     },
 
     //  代理better-scroll的enable事件
-    enable () {
+    enable() {
       this.scroll && this.scroll.enable();
     },
 
     // 代理better-scroll的refresh事件
-    refresh () {
+    refresh() {
       this.scroll && this.scroll.refresh();
     },
 
     // 代理better-scroll的scrollTo事件
-    scrollTo () {
+    scrollTo() {
       this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
     },
 
     // 代理better-scroll的scrollToElement事件
-    scrollToElement () {
+    scrollToElement() {
       this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
     },
   },
 
   watch: {
     // 数据变化scroll组件重新更新
-    data () {
+    data() {
       setTimeout(() => {
         this.refresh()
       }, this.refreshDelay);

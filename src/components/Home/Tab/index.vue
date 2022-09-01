@@ -1,40 +1,26 @@
 <template>
   <div class="tab">
-    <router-link
-      tag="div"
-      class="tab-item"
-      to="/component-demo"
-    >
+    <router-link tag="div" class="tab-item" to="/component-demo">
       <span class="tab-link">组件</span>
     </router-link>
-    <router-link
-      tag="div"
-      class="tab-item"
-      to="/vue-code"
-    >
+    <router-link tag="div" class="tab-item" to="/vue-code">
       <span class="tab-link">vue-code</span>
     </router-link>
-    <router-link
-      tag="div"
-      class="tab-item"
-      to="/elem-search"
-    >
+    <router-link tag="div" class="tab-item" to="/elem-search">
       <span class="tab-link">Elem相关</span>
     </router-link>
-    <router-link
-      tag="div"
-      class="tab-item"
-      to="/search"
-    >
+    <router-link tag="div" class="tab-item" to="/search">
       <span class="tab-link">Graphql.js</span>
     </router-link>
   </div>
 </template>
 <script>
 export default {
-  data () {
+<<<<<<< HEAD:src/components/Home/Tab/index.vue
+  data() {
     return {};
   },
+  name: 'tab'
 }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">

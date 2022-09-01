@@ -4,12 +4,10 @@
       <slot />
     </div>
     <div class="dots">
-      <span
-        class="dot"
-        :class="{active: currentPageIndex === index}"
-        v-for="(item, index) in dots"
-        :key="index"
-      />
+      <span v-for="(item, index) in dots" :key="index" :class="{
+        dot: true,
+        active: currentPageIndex === index
+      }" />
     </div>
   </div>
 </template>
@@ -40,7 +38,7 @@ export default {
     },
   },
 
-  data () {
+  data() {
     return {
       // 小圆点
       dots: [],
@@ -48,7 +46,7 @@ export default {
     };
   },
 
-  mounted () {
+  mounted() {
     setTimeout(() => {
       // 设置轮播图宽度
       this.setSliderWidth();
@@ -70,12 +68,11 @@ export default {
   },
 
   methods: {
-    setSliderWidth (isResize) {
+    setSliderWidth(isResize) {
       this.children = this.$refs.sliderGroup.children;
       let width = 0;
       //  可视宽度
       let sliderWidth = this.$refs.slider.clientWidth;
-      // console.log(sliderWidth)
       for (let i = 0; i < this.children.length; i++) {
         let child = this.children[i];
         addClass(child, 'slider-item');
@@ -86,11 +83,10 @@ export default {
       if (this.loop && !isResize) {
         width += 2 * sliderWidth;
       }
-      // console.log(width)
       this.$refs.sliderGroup.style.width = width + 'px';
     },
 
-    initSlider () {
+    initSlider() {
       //  初始化slider组件
       this.slider = new BScroll(this.$refs.slider, {
         scrollX: true,
@@ -106,9 +102,8 @@ export default {
     },
 
     // 滚动结束后
-    onScrollEnd () {
+    onScrollEnd() {
       let pageIndex = this.slider.getCurrentPage().pageX;
-      // console.log(pageIndex)
       this.currentPageIndex = pageIndex;
       if (this.autoPlay) {
         clearTimeout(this.timer);
@@ -118,7 +113,7 @@ export default {
     },
 
     //  自动播放
-    play () {
+    play() {
       clearTimeout(this.timer)
       this.timer = setTimeout(() => {
         this.slider.next();
@@ -126,13 +121,12 @@ export default {
     },
 
     // 初始化小圆点
-    initDots () {
+    initDots() {
       this.dots = new Array(this.children.length);
-      // console.log(this.dots)
     },
   },
 
-  destoryed () {
+  destoryed() {
     clearTimeout(this.timer);
   },
 }
