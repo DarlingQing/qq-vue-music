@@ -1,0 +1,37 @@
+.ScrollTopTop {
+  position: fixed;
+  bottom: .6rem;
+  right: .24rem;
+  width: .8rem;
+  height: .8rem;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+  color: #555;
+  font-size: .22rem;
+  z-index: 102;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ScrollTopTop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: "";
+    transform: rotate(45deg);
+    width: .2rem;
+    height: .2rem;
+    border-left: 2px solid #555;
+    border-top: 2px solid #555;
+  }
+
+  &::after {
+    content: "顶部";
+  }
+}
+

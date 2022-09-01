@@ -3,10 +3,12 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    sourceType: 'module',
+    parser: 'babel-eslint',
   },
   env: {
     browser: true,
+    node: true,
   },
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
@@ -26,6 +28,7 @@ module.exports = {
     // 关闭分号检查规则
     semi: 'off',
     "space-before-function-paren": ["error", "always"],
+    "comma-dangle": 0,//对象字面量项尾不能有逗号
     // 不希望检查函数与参数前面分号限制
     "space-before-function-paren": ["error", {
         "anonymous": "ignore",

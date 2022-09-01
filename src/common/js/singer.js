@@ -2,7 +2,7 @@
  * Singer接口类
  */
 export default class Singer {
-  constructor ({id, name}) {
+  constructor ({ id, name }) {
     this.id = id;
     this.name = name;
     this.avatar = require('common/image/default.png');

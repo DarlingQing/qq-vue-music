@@ -1,28 +1,26 @@
 <template>
   <div id="app">
-   <m-header></m-header>
-    <tab></tab>
+    <!-- <m-header /> -->
+    <!-- <tab /> -->
     <keep-alive>
-      <router-view/>
+      <router-view />
     </keep-alive>
-    <player></player>
   </div>
 </template>
 
 <script>
-import MHeader from 'components/m-header/m-header.vue';
-import Tab from 'components/tab/tab.vue';
-import Player from 'components/player/player.vue';
+// import MHeader from '@/components/Home/MHeader';
+// import Tab from '@/components/Home/Tab';
+
 export default {
   name: 'App',
   components: {
-    MHeader,
-    Tab,
-    Player
+    // MHeader,
+    // Tab,
   }
 }
 </script>
 
-<style lang="stylus" src="common/stylus/index.styl">
-  // @import "~common/stylus/variable"
+<style lang="stylus" src="@/common/stylus/index.styl">
+  @import "~common/stylus/variable"
 </style>

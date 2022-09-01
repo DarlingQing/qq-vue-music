@@ -1,0 +1,28 @@
+query test($login: String!) {
+  viewer {
+    # login
+    avatarUrl
+    bio
+    bioHTML
+    name
+    location
+    email
+    companyHTML
+    id
+    isBountyHunter
+    isCampusExpert
+    isDeveloperProgramMember
+    # ... on Test {
+    #   login
+    # }
+  }
+  user(login: $login) {
+    avatarUrl
+    email
+    bio
+    bioHTML
+    company
+    createdAt
+    login
+  }
+}

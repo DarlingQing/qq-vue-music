@@ -1,0 +1,40 @@
+.UiSkeleton {
+  width: 100%;
+  display: table;
+}
+
+.UiSkeleton-active {
+  .UiSkeleton-paragraph li,
+  .UiSkeleton-title {
+    background: linear-gradient(90deg, rgba(190, 190, 190, .2) 25%, rgba(129, 129, 129, .24) 37%, rgba(190, 190, 190, .2) 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+  }
+}
+
+.UiSkeleton-title {
+  height: .32rem;
+  margin-top: .32rem;
+  background: rgba(190, 190, 190, .2);
+}
+
+.UiSkeleton-paragraph {
+  list-style-type: none;
+  margin-top: .48rem;
+
+  & > li {
+    width: 100%;
+    margin-top: .32rem;
+    height: .32rem;
+    background: rgba(190, 190, 190, .2);
+  }
+}
+
+@keyframes skeleton-loading {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
+}

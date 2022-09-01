@@ -1,0 +1,58 @@
+.NoticeRemind {
+  background: #fff;
+  margin: .24rem;
+  border-radius: .1rem;
+  height: .8rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.NoticeRemind-item {
+  height: .8rem;
+  display: flex;
+  align-items: center;
+  font-size: .24rem;
+  color: #222;
+  padding-left: .36rem;
+}
+
+.scroll-enter-active {
+  transform: translateY(0);
+  transition: transform .3s ease;
+}
+
+.scroll-leave-active {
+  transform: translateY(-100%);
+  opacity: 1;
+  transition: all .3s ease;
+}
+
+.scroll-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.scroll-leave {
+  transform: translateY(0);
+  opacity: 0;
+}
+
+.NoticeRemind-item-text {
+  padding-left: .22rem;
+  height: .8rem;
+  line-height: .8rem;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.NoticeRemind-item-text-label {
+  color: $primary-red;
+}
+
+.NoticeRemind-item-icon-right {
+  position: absolute;
+  right: .24rem;
+  width: .14rem;
+}

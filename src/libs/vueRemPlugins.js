@@ -16,18 +16,17 @@ export default {
     Vue,
     options = {
       pxToRem: 75,
-      auto: true
-    }
+      auto: true,
+    },
   ) {
     // 是否启用
-    let _flag = false;
+    let isflag = false;
 
     const pxToRem = options.pxToRem;
 
     const setRemUnit = () => {
-      const rem =
-        docEl.clientWidth <= pxToRem * 10 ? docEl.clientWidth / 10 : pxToRem;
-      docEl.style.fontSize = rem + 'px';
+      const rem = docEl.clientWidth <= pxToRem * 10 ? docEl.clientWidth / 10 : pxToRem;
+      docEl.style.fontSize = `${rem}px`;
       // console.log(rem);
     };
     const pageShow = (event) => {
@@ -38,10 +37,11 @@ export default {
       }
     };
 
-    const setBodyFontSize = function() {
+    const setBodyFontSize = () => {
       if (document.body) {
-        document.body.style.fontSize =
-          docEl.clientWidth <= pxToRem * 10 ? 12 * dpr + 'px' : pxToRem + 'px';
+        document.body.style.fontSize = docEl.clientWidth <= pxToRem * 10
+          ? `${12 * dpr}px`
+          : `${pxToRem}px`;
       } else {
         document.addEventListener('DOMContentLoaded', setBodyFontSize, false);
       }
@@ -53,8 +53,8 @@ export default {
         // setBodyFontSize();
         setRemUnit();
         if (dpr >= 2) {
-          let fakeBody = document.createElement('body');
-          let testElement = document.createElement('div');
+          const fakeBody = document.createElement('body');
+          const testElement = document.createElement('div');
           testElement.style.border = '.5px solid transparent';
           fakeBody.appendChild(testElement);
           docEl.appendChild(fakeBody);
@@ -65,14 +65,14 @@ export default {
         }
         window.addEventListener('resize', setRemUnit, false);
         window.addEventListener('pageShow', pageShow, false);
-        _flag = true;
+        isflag = true;
       } else {
         console.log('Rem插件: 关闭');
         document.body.style.fontSize = null;
         docEl.style.fontSize = null;
         window.removeEventListener('resize', setRemUnit, false);
         window.removeEventListener('pageShow', pageShow, false);
-        _flag = false;
+        isflag = false;
       }
     };
 
@@ -80,9 +80,9 @@ export default {
     if (options.auto) {
       Vue.mixin({
         beforeCreate() {
-          if (!_flag) this.$pluginRem(true);
-        }
+          if (!isflag) this.$pluginRem(true);
+        },
       });
     }
-  }
+  },
 };

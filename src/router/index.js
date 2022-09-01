@@ -1,48 +1,55 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
+import ComponentDemo from '@/components/ComponentDemo/index.vue';
+import VueCode from '@/components/VueCode/index.vue';
+import VueCodeRender from '@/components/VueCode/render.vue';
+import ElemSearch from '@/components/ElemSearch/index.vue';
+
 //  注册组件
 Vue.use(Router);
 
-const Recommend = () => import('components/recommend/recommend');
-const Singer = () => import('components/singer/singer');
-const SingerDetail = () => import('components/singer-detail/singer-detail');
-const Rank = () => import('components/rank/rank');
-const Search = () => import('components/search/search');
-const UserCenter = () => import('components/user-center/user-center');
-
-// import HelloWorld from '@/components/HelloWorld'
+const Recommend = () => import('@/components/recommend/recommend');
+const Search = () => import('@/components/search/search');
+const UserCenter = () => import('@/components/user-center/user-center');
 
 export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/recommend'
+      redirect: '/component-demo',
     },
     {
-      path: '/recommend',
-      component: Recommend
+      path: '/component-demo',
+      component: ComponentDemo,
     },
     {
-      path: '/singer',
-      component: Singer,
-      children: [
-        {
-          path: ':id',
-          component: SingerDetail
-        }
-      ]
+      path: '/vue-code',
+      component: VueCode,
+      // children: [{
+      //   path: 'render',
+      //   component: VueCodeRender,
+      // }],
     },
     {
-      path: '/rank',
-      component: Rank
+      path: '/render',
+      component: VueCodeRender,
+    },
+    {
+      path: '/js-code',
+      component: Recommend,
+    },
+    {
+      path: '/elem-search',
+      component: ElemSearch,
     },
     {
       path: '/search',
-      component: Search
+      component: Search,
     },
     {
       path: '/user',
-      component: UserCenter
-    }
-  ]
+      component: UserCenter,
+    },
+  ],
 })

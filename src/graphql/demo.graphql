@@ -1,0 +1,17 @@
+query test($login: String!) {
+  viewer {
+    login
+    name
+    id
+    avatarUrl
+    company
+    createdAt
+    email
+    url
+  }
+  user(login: $login) {
+    id
+    email
+    isBountyHunter
+  }
+}

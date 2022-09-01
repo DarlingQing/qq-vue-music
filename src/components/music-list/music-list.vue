@@ -1,32 +1,34 @@
 <template>
   <div class="music-list">
     <!--头部-->
-    <div class="back" @click="back">
-      <i class="icon-back"></i>
+    <div @click="back" class="back">
+      <i class="icon-back" />
     </div>
-    <h2 class="title" v-html="title"></h2>
-    <div class="bg-image" :style="bgStyle" ref="bgImage">
+    <h2 v-html="title" class="title" />
+    <div :style="bgStyle" class="bg-image" ref="bgImage">
       <div class="play-wrapper">
-        <div ref="playBtn" class="play" v-show="songs.length>0&&playFlag">
-          <i class="icon-play"></i>
+        <div v-show="songs.length > 0 && playFlag" ref="playBtn" class="play">
+          <i class="icon-play" />
           <span class="text">随机播放全部</span>
         </div>
       </div>
-      <div class="filter" ref="filter"></div>
+      <div class="filter" ref="filter" />
     </div>
     <!--歌曲列表部分-->
-    <div class="bg-layer" ref="layer"></div>
-    <scroll :data="songs"
-      @scroll="scroll"
+    <div class="bg-layer" ref="layer" />
+    <scroll
+      :data="songs"
       :probe-type="probeType"
       :listen-scroll="listenScroll"
+      @scroll="scroll"
       class="list"
-      ref="list">
+      ref="list"
+    >
       <div class="song-list-wrapper">
-        <song-list :songs="songs" @select="selectItem"></song-list>
+        <song-list :songs="songs" @select="selectItem" />
       </div>
-      <div class="loading-container" v-show="!songs.length">
-        <loading></loading>
+      <div v-show="!songs.length" class="loading-container">
+        <loading />
       </div>
     </scroll>
   </div>
@@ -35,12 +37,14 @@
 import Scroll from 'base/scroll/scroll';
 import Loading from 'base/loading/loading'
 import SongList from 'base/song-list/song-list';
-import {prefixStyle} from 'common/js/dom';
-import {mapActions} from 'vuex';
+import { prefixStyle } from 'common/js/dom';
+import { mapActions } from 'vuex';
+
 // 头部高度
 const RESERVED_HEIGHT = 40;
 const transform = prefixStyle('transform');
 const backdrop = prefixStyle('backdrop-filter');
+
 export default {
   props: {
     // 背景图片
@@ -60,8 +64,8 @@ export default {
       type: String,
       default: ''
     }
-
   },
+
   data () {
     return {
       // 滚动的距离
@@ -69,16 +73,19 @@ export default {
       playFlag: true
     }
   },
+
   computed: {
     bgStyle() {
       return `background-image:url(${this.bgImage})`
     }
   },
+
   created() {
     // console.log(this.bgStyle);
     this.probeType = 3;
     this.listenScroll = true;
   },
+
   mounted() {
     // console.log(this.$refs.bgImage.clientHeight);
     // 图片高度，不同屏幕下高度不一样
@@ -87,24 +94,29 @@ export default {
     this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
     // console.log(this.minTranslateY);
   },
+
   methods: {
     // 返回上一级路由
     back() {
       this.$router.back();
     },
+
     scroll(pos) {
       this.scrollY = pos.y;
     },
+
     selectItem(item, index) {
       this.selectPlay({
         list: this.songs,
         index
       })
     },
+
     ...mapActions([
       'selectPlay'
     ])
   },
+
   watch: {
     // 监听scrollY的值
     scrollY(newVal) {
@@ -138,6 +150,7 @@ export default {
       this.$refs.bgImage.style[transform] = `scale(${scale})`;
     }
   },
+
   components: {
     Scroll,
     SongList,
